@@ -26,8 +26,10 @@ canvas.cellWidth = 10;
 /*-------------drawing the canvas--------------*/
 canvas.redraw = function(fillColor, strokeColor) {
   //creates the canvas colors
+  //fillColor is the main game window
   fillColor = fillColor || 'orangered',
-  strokeColor = strokeColor || 'black';
+  //strokeColor outlines the main window
+  strokeColor = strokeColor || 'darkgreen';
 
   this.paint(0,0, fillColor, strokeColor, this.width, this.height);
 };
