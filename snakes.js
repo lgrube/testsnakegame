@@ -15,10 +15,19 @@ var badFood; //creates the variable badFood
 canvas.element = document.getElementById('canvas');
 canvas.context = canvas.element.getContext('2d');
 //setting the canvas width to what the html file states
-canvas.width = canvas.element.getAttribute('width')
+canvas.width = canvas.element.getAttribute('width');
 //setting the canvas height to what the html file states
 canvas.height = canvas.element.getAttribute('height');
 //setts the size of the snake by using cell blocks
 //have to make sure canvas size can support cell width or it will be to big and wont run correctly
 canvas.cellWidth = 10;
 /*-----------------end canvas elements----------------*/
+
+/*-------------drawing the canvas--------------*/
+canvas.redraw = function(fillColor, strokeColor) {
+  //creates the canvas colors
+  fillColor = fillColor || 'orangered',
+  strokeColor = strokeColor || 'black';
+
+  this.paint(0,0, fillColor, strokeColor, this.width, this.height);
+};
