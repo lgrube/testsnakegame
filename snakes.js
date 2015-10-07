@@ -31,3 +31,25 @@ canvas.redraw = function(fillColor, strokeColor) {
 
   this.paint(0,0, fillColor, strokeColor, this.width, this.height);
 };
+/*-----------end drawing canvas-----------------*/
+
+/*------------giving the canvas its color-------*/
+canvas.paint = function(x,y, fillColor, strokeColor, width, height){
+  width = width ||this.cellWidth,
+  height = height || this.cellWidth,
+  fillColor = fillColor || 'purple',
+  strokeColor = strokeColor || 'pink';
+
+  this.context.fillStyle = fillColor;
+  this.context.fillRect(x*canvas.cellWidth, y*canvas.cellWidth, width, height);
+  this.context.strokeStyle = strokeColor;
+  this.context.strokeRect(x*canvas.cellWidth, y*canvas.cellWidth, width, height);
+};
+/*-------------end canvas color--------------*/
+
+/*---------------colored text----------------*/
+
+/*----------------end colored text-----------*/
+
+/*-------------create the canvas---------*/
+canvas.redraw();
