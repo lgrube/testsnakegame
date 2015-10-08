@@ -51,6 +51,7 @@ canvas.paint = function(x,y, mainColor, outlineColor, width, height){
   this.context.fillRect(x*canvas.cellWidth, y*canvas.cellWidth, width, height);
   //sets teh context of outline style with outlinecolor
   this.context.strokeStyle = outlineColor;
+  //sets the rectangle with the outline
   this.context.strokeRect(x*canvas.cellWidth, y*canvas.cellWidth, width, height);
 };
 /*-------------end canvas color--------------*/
@@ -60,4 +61,5 @@ canvas.paint = function(x,y, mainColor, outlineColor, width, height){
 /*----------------end colored text-----------*/
 
 /*-------------create the canvas---------*/
+//calls the redraw function to create the canvas
 canvas.redraw();
