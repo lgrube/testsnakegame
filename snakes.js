@@ -12,6 +12,7 @@ var badFood; //creates the variable badFood
 /*----end create variable--*/
 
 /*----------------------canvas elements---------------*/
+//creates the document called canvas which will create everything
 canvas.element = document.getElementById('canvas');
 canvas.context = canvas.element.getContext('2d');
 //setting the canvas width to what the html file states
@@ -24,27 +25,32 @@ canvas.cellWidth = 10;
 /*-----------------end canvas elements----------------*/
 
 /*-------------drawing the canvas--------------*/
-canvas.redraw = function(fillColor, strokeColor) {
+canvas.redraw = function(mainColor, outlineColor) {
   //creates the canvas colors
-  //fillColor is the main game window
-  fillColor = fillColor || 'orangered',
-  //strokeColor outlines the main window
-  strokeColor = strokeColor || 'darkgreen';
-
-  this.paint(0,0, fillColor, strokeColor, this.width, this.height);
+  //mainColor is the main game window
+  mainColor = mainColor || 'orangered',
+  //outlineColor outlines the main window
+  outlineColor = outlineColor || 'darkgreen';
+  this.paint(0,0, mainColor, outlineColor, this.width, this.height);
 };
 /*-----------end drawing canvas-----------------*/
 
 /*------------giving the canvas its color-------*/
-canvas.paint = function(x,y, fillColor, strokeColor, width, height){
+canvas.paint = function(x,y, mainColor, outlineColor, width, height){
+  //setting the width of the canvas to whatever its been declared at
   width = width ||this.cellWidth,
+  //setting the height of the canvas to what its been declared
   height = height || this.cellWidth,
-  fillColor = fillColor || 'purple',
-  strokeColor = strokeColor || 'pink';
-
-  this.context.fillStyle = fillColor;
+  //sets the fill in color
+  mainColor = mainColor || 'purple',
+  //sets the outline color
+  outlineColor = outlineColor || 'pink';
+  //sets the context of fillStyle equal to whatever color we declared in canvas redraw
+  this.context.fillStyle = mainColor;
+  //fills the rectangle by multiplying x and y with cellwidth
   this.context.fillRect(x*canvas.cellWidth, y*canvas.cellWidth, width, height);
-  this.context.strokeStyle = strokeColor;
+  //sets teh context of outline style with outlinecolor
+  this.context.strokeStyle = outlineColor;
   this.context.strokeRect(x*canvas.cellWidth, y*canvas.cellWidth, width, height);
 };
 /*-------------end canvas color--------------*/
