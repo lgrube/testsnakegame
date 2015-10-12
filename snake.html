@@ -1,34 +1,37 @@
 <!-- Luke Grube snake game-->
 <html>
   <head>
+    <!--creates the style for the welcome screen and button-->
     <style>
       #welcome_message {
-        text-align      : center;
-        margin-top      : 200;
-        background      : grey;
-        padding         : 5px;
+        text-align      : center;/* centers the text*/
+        margin-top      : 200;/* makes the text appear in the middle of the screen*/
+        background      : grey; /* colors background*/
+        padding         : 5px;/*creates a padding the clears the boarding around an object*/
       }
       body {
-        background      : limegreen;
+        background      : orangered;/*color of seperate page*/
       }
       a {
-        padding         : 5px;
-        background-color: silver;
+        padding         : 5px;/*padding for the button*/
+        background-color: silver;/*color for the button*/
       }
     </style>
-    <title> Snake Game </title>
+    <title> Snake Game </title> <!--creates title of web page-->
+    <!--uses the snakes.js file for the function-->
       <script type="text/javascript" src="js/snakes.js">
         function showPage() {
-          document.getElementById("welcome_message").style.display = "none";
-          document.getElementById("real_content").style.display = "block";
+          document.getElementById("welcome_message").style.display = "none"; //creates a document labeled as welcome_message which holds all the welcome_message contect
+          document.getElementById("real_content").style.display = "block"; //hold all the rest of the content for the game
         }
       </script>
-    <body onload="showPage();">
+    <body onload="showPage();"><!-- declares that this is the first page to load-->
       <div id="welcome_message">
+        <!-- creates what welcome message with directions on how to control the game including the button-->
         <h2>Welcome To the Snake Game</h2>
         <p> This a new creation of the orginal snake game.</p>
         <p> You will be using the arrow keys to control the snake.</p>
-        You want to try to get the green blocks and avoid the purple blocks. Enjoy!</p>
+        You want to try to get the <span style="background-color:green";>green</span> blocks and avoid the <span style="background-color: purple";>purple</span> blocks. Enjoy!</p>
         <a href="./snakegame.html" class="btn btn-info">Lets play snake</a>
       </div>
       <div id="real_content">
