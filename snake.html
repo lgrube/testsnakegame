@@ -12,11 +12,10 @@
       }
     </style>
     <title> Snake Game </title>
-      <!-- calls the javascript class and runs the code-->
-      <script type="text/javascript" src="./snakes.js">
+      <script type="text/javascript" src="./welcomescreen.js">
         function showPage() {
           document.getElementById("welcome_message").style.display = "none";
-          document.getElementById("canvas").style.display = "block";
+          document.getElementById("real_content").style.display = "block";
         }
       </script>
     <body onload="showPage();">
@@ -24,11 +23,13 @@
         <h2>Welcome To the Snake Game</h2>
         <p> This a new creation of the orginal snake game.</p>
         <p> You will be using the arrow keys to control the snake.</p>
-        You want to try to get the green Food and avoid the purple food. Enjoy!</p>
+        You want to try to get the green blocks and avoid the purple blocks. Enjoy!</p>
+        <button type="button" class="btn btn-success" >Please click to play Snake</button>
+        <a href="./snakegame.html" class="btn btn-info">Lets play snake</a>
       </div>
-      <div id="canvas">
-        <!-- sets the canvas you will play in-->
-        <canvas id="canvas" width="1425" height="780"></canvas>
+      <div id="real_content">
+        <script type="text/javascript" src="./snakegame.html">
+        </script>
       </div>
     </body>
   </head>
