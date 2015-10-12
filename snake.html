@@ -7,26 +7,29 @@
         margin-top: 200;
         background: grey;
       }
+      body {
+        background: limegreen;
+      }
     </style>
     <title> Snake Game </title>
-    <!-- calls the javascript class and runs the code-->
-    <script type="text/javascript" src="./snakes.js">
-      function showPage() {
-        document.getElementById("welcome_message").style.display = "none";
-        document.getElementById("canvas").style.display = "block";
-      }
-    </script>
+      <!-- calls the javascript class and runs the code-->
+      <script type="text/javascript" src="./snakes.js">
+        function showPage() {
+          document.getElementById("welcome_message").style.display = "none";
+          document.getElementById("canvas").style.display = "block";
+        }
+      </script>
+    <body onload="showPage();">
+      <div id="welcome_message">
+        <h2>Welcome To the Snake Game</h2>
+        <p> This a new creation of the orginal snake game.</p>
+        <p> You will be using the arrow keys to control the snake.</p>
+        You want to try to get the green Food and avoid the purple food. Enjoy!</p>
+      </div>
+      <div id="canvas">
+        <!-- sets the canvas you will play in-->
+        <canvas id="canvas" width="1425" height="780"></canvas>
+      </div>
+    </body>
   </head>
-  <body onload="showPage();">
-    <div id="welcome_message">
-      <h2>Welcome To the Snake Game</h2>
-      <p> This a new creation of the orginal snake game.</p>
-      <p> You will be using the arrow keys to control the snake.</p>
-      You want to try to get the green Food and avoid the purple food. Enjoy!</p>
-    </div>
-    <div id="canvas">
-      <!-- sets the canvas you will play in-->
-      <canvas id="canvas" width="1425" height="780"></canvas>
-    </div>
-  </body>
 </html>
