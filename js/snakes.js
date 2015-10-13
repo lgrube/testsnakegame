@@ -99,7 +99,7 @@ function Snake(length, bodyColor, outlineColor, startingPosition) {
   this.nx;//controls next x position
 
   this.ny;//controls next y position
-  var startingPosition = startingPosition;
+  startingPosition = startingPosition;
   this.create = function() {
     for (var i = this.length - 1; i >= 0; i--) {
       this.array.push({x: startingPosition.x + i, y: startingPosition.y});
@@ -108,3 +108,33 @@ function Snake(length, bodyColor, outlineColor, startingPosition) {
 
   this.create();
 }
+
+Snake.prototype.move = function() {
+  if (this.nd.length) {
+    this.direction = this.nd.shift();
+  }
+
+  this.nx = this.array[0].x;
+  this.ny = this.array[0].y;
+  var tail;
+  switch (this.direction) {
+    case 'right':
+      this.nx++;
+      break;
+    case 'left':
+      this.nx--;
+      break;
+    case 'up':
+      this.ny--;
+      break;
+    case 'down':
+      this.ny++;
+      break;
+  }
+
+  if (this.outsideBounds() || this.colliding()) {
+    game.over();
+    return;
+  }
+
+};
