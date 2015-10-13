@@ -100,6 +100,8 @@ function Snake(length, bodyColor, outlineColor, startingPosition) {
 
   this.ny;//controls next y position
   startingPosition = startingPosition;
+
+  //creates the starting point of the snake
   this.create = function() {
     for (var i = this.length - 1; i >= 0; i--) {
       this.array.push({x: startingPosition.x + i, y: startingPosition.y});
@@ -109,6 +111,9 @@ function Snake(length, bodyColor, outlineColor, startingPosition) {
   this.create();
 }
 
+/*-----------end of actual snake class------------------*/
+
+/*----------controls the functionality of snake moving-------*/
 Snake.prototype.move = function() {
   if (this.nd.length) {
     this.direction = this.nd.shift();
@@ -150,6 +155,7 @@ Snake.prototype.move = function() {
   this.array.unshift(tail);
   this.paint();
 };
+/*---------end of controlling snake------------*/
 
 Snake.prototype.paint = function() {
   canvas.redraw();
@@ -170,6 +176,18 @@ Snake.prototype.outsideBounds = function() {
 Snake.prototype.eatingFood = function() {
   if (this.nx === food.x && this.ny === food.y) {
     return true;
+  }
+
+  return false;
+};
+
+Snake.prototype.colliding = function(x, y) {
+  x = x || this.nx;
+  y = y || this.ny;
+  for (var i = 0; i < this.array.length; i++) {
+    if (this.array[i].x === x && this.array[i].y === y) {
+      return true;
+    }
   }
 
   return false;
