@@ -137,4 +137,24 @@ Snake.prototype.move = function() {
     return;
   }
 
+  if (this.eatingFood()) {
+    game.score++;
+    tail = {x: this.nx, y: this.ny};
+    food = new GoodFood();
+  } else {
+    var tail = this.array.pop();
+    tail.x = this.nx;
+    tail.y = this.ny;
+  }
+
+  this.array.unshift(tail);
+  this.paint();
+};
+
+Snake.prototype.paint = function() {
+  canvas.redraw();
+  for (var i = 0; i < this.array.length; i++) {
+    var j = this.array[i];
+    canvas.paint(j.x, j.y, this.bodyColor, this.outlineColor);
+  }
 };
