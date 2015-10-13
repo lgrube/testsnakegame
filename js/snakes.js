@@ -5,7 +5,7 @@
 */
 
 /*----------------create variable------------------*/
-var canvas = new Object(); //creates a new object called canvas
+var canvas = new Object({}); //creates a new object called canvas
 var mainSnake; //create the variable mainSnake
 var goodFood; //creates the variable goodFood
 var badFood; //creates the variable badFood
@@ -70,10 +70,41 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
 /*-------------end canvas color--------------*/
 
 /*---------------colored text----------------*/
+canvas.paintText = function(text, x, y) {
+  //controls where the text is according to the x axis
+  var x = x || 5;
 
+  //controls where the text is according to the y axis
+  var y = y || 15;
+
+  //fills in the text with these coordinates
+  this.context.fillText(text, x, y);
+};
 /*----------------end colored text-----------*/
 
 /*-------------create the canvas---------*/
 
 //calls the redraw function to create the canvas
 canvas.redraw();
+/*--------------end creating the canvas------*/
+
+/*-------create that actual snake-----------*/
+function Snake(length, bodyColor, outlineColor, startingPosition) {
+  this.length = length;
+  this.bodyColor = bodyColor;
+  this.outlineColor = outlineColor;
+  this.array = [];
+  this.direction = 'right'; //set direction it will go to begin with
+  this.nd = []; //the next direction it will be going
+  this.nx;//controls next x position
+
+  this.ny;//controls next y position
+  var startingPosition = startingPosition;
+  this.create = function() {
+    for (var i = this.length - 1; i >= 0; i--) {
+      this.array.push({x: startingPosition.x + i, y: startingPosition.y});
+    }
+  };
+
+  this.create();
+}
