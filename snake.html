@@ -22,7 +22,7 @@
       <script type="text/javascript" src="js/snakes.js">
         function showPage() {
           document.getElementById("welcome_message").style.display = "none"; //creates a document labeled as welcome_message which holds all the welcome_message contect
-          document.getElementById("real_content").style.display = "block"; //hold all the rest of the content for the game
+          document.getElementById("canvas").style.display = "block"; //hold all the rest of the content for the game
         }
       </script>
     <body onload="showPage();"><!-- declares that this is the first page to load-->
@@ -35,7 +35,7 @@
         blocks and avoid the <span style="background-color: purple">purple</span> blocks. Enjoy!</p>
         <a href="./snakegame.html" class="btn btn-info">Lets play snake</a>
       </div>
-      <div id="real_content">
+      <div id="canvas">
         <script type="text/javascript" src="js/snakes.js">
         </script>
       </div>

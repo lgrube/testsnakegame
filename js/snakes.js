@@ -7,7 +7,7 @@
 /*----------------create variable------------------*/
 var canvas = new Object({}); //creates a new object called canvas
 var mainSnake; //create the variable mainSnake
-var goodFood; //creates the variable goodFood
+var Food; //creates the variable goodFood
 var badFood; //creates the variable badFood
 /*----end create variable--*/
 
@@ -25,17 +25,17 @@ canvas.height = canvas.element.getAttribute('height');
 
 //setts the size of the snake by using cell blocks
 //have to make sure canvas size can support cell width or it will be to big and wont run correctly
-canvas.cellWidth = 10;
+canvas.cellWidth = 20;
 /*-----------------end canvas elements----------------*/
 
 /*-------------drawing the canvas--------------*/
 canvas.redraw = function(mainColor, outlineColor) {
   //creates the canvas colors
   //mainColor is the main game window
-  mainColor = mainColor || 'orangered',
+  mainColor = mainColor || 'white';
 
   //outlineColor outlines the main window
-  outlineColor = outlineColor || 'darkgreen';
+  outlineColor = outlineColor || 'black';
   this.paint(0, 0, mainColor, outlineColor, this.width, this.height);
 
 };
@@ -50,10 +50,10 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
   height = height || this.cellWidth,
 
   //sets the fill in color
-  mainColor = mainColor || 'purple',
+  mainColor = mainColor || 'red',
 
   //sets the outline color
-  outlineColor = outlineColor || 'pink';
+  outlineColor = outlineColor || 'white';
 
   //sets the context of fillStyle equal to whatever color we declared in canvas redraw
   this.context.fillStyle = mainColor;
@@ -72,10 +72,10 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
 /*---------------colored text----------------*/
 canvas.paintText = function(text, x, y) {
   //controls where the text is according to the x axis
-  var x = x || 5;
+  x = x || 5;
 
   //controls where the text is according to the y axis
-  var y = y || 15;
+  y = y || 15;
 
   //fills in the text with these coordinates
   this.context.fillText(text, x, y);
@@ -140,9 +140,9 @@ Snake.prototype.move = function() {
   if (this.eatingFood()) {
     game.score++;
     tail = {x: this.nx, y: this.ny};
-    food = new GoodFood();
+    food = new Food();
   } else {
-    var tail = this.array.pop();
+    tail = this.array.pop();
     tail.x = this.nx;
     tail.y = this.ny;
   }
@@ -157,4 +157,20 @@ Snake.prototype.paint = function() {
     var j = this.array[i];
     canvas.paint(j.x, j.y, this.bodyColor, this.outlineColor);
   }
+};
+
+Snake.prototype.outsideBounds = function() {
+  if (this.nx <= -1 || this.nx === canvas.width / canvas.cellWidth || this.ny <= -1 || this.ny === canvas.height / canvas.cellWidth) {
+    return true;
+  }
+
+  return false;
+};
+
+Snake.prototype.eatingFood = function() {
+  if (this.nx === food.x && this.ny === food.y) {
+    return true;
+  }
+
+  return false;
 };
