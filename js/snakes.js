@@ -32,7 +32,7 @@ canvas.cellWidth = 20;
 canvas.redraw = function(mainColor, outlineColor) {
   //creates the canvas colors
   //mainColor is the main game window
-  mainColor = mainColor || 'white';
+  var mainColor = mainColor || 'white',
 
   //outlineColor outlines the main window
   outlineColor = outlineColor || 'black';
@@ -44,13 +44,13 @@ canvas.redraw = function(mainColor, outlineColor) {
 /*------------giving the canvas its color-------*/
 canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
   //setting the width of the canvas to whatever its been declared at
-  width = width || this.cellWidth,
+  var width = width || this.cellWidth,
 
   //setting the height of the canvas to what its been declared
   height = height || this.cellWidth,
 
   //sets the fill in color
-  mainColor = mainColor || 'white',
+  mainColor = mainColor || 'red',
 
   //sets the outline color
   outlineColor = outlineColor || 'black';
@@ -236,12 +236,17 @@ game.runLoop = function() {
 };
 
 game.start = function() {
-  mainSnake = new Snake(5, 'black', 'white', {x: 10, y: 10});
+  mainSnake = new Snake(5, 'green', 'yellow', {x: 10, y: 10});
   food = new Food();
   game.score = 0;
 };
 
+game.over = function() {
+
+};
+
 game.start();
+game.runLoop();
 
 document.onkeydown = function(e) {
   if (typeof mainSnake !== 'undefined') {
