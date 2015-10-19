@@ -5,7 +5,7 @@
 */
 
 /*----------------create variable------------------*/
-var canvas = new Object({}); //creates a new object called canvas
+var canvas = new Object(); //creates a new object called canvas
 var mainSnake; //create the variable mainSnake
 var Food; //creates the variable goodFood
 var badFood; //creates the variable badFood
@@ -32,10 +32,10 @@ canvas.cellWidth = 20;
 canvas.redraw = function(mainColor, outlineColor) {
   //creates the canvas colors
   //mainColor is the main game window
-  mainColor = mainColor || 'yellow';
+  mainColor = mainColor || 'white';
 
   //outlineColor outlines the main window
-  outlineColor = outlineColor || 'green';
+  outlineColor = outlineColor || 'black';
   this.paint(0, 0, mainColor, outlineColor, this.width, this.height);
 
 };
@@ -50,10 +50,10 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
   height = height || this.cellWidth,
 
   //sets the fill in color
-  mainColor = mainColor || 'yellow',
+  mainColor = mainColor || 'white',
 
   //sets the outline color
-  outlineColor = outlineColor || 'green';
+  outlineColor = outlineColor || 'black';
 
   //sets the context of fillStyle equal to whatever color we declared in canvas redraw
   this.context.fillStyle = mainColor;
@@ -191,4 +191,77 @@ Snake.prototype.colliding = function(x, y) {
   }
 
   return false;
+};
+
+function Food() {
+  this.generateCoords = function() {
+    this.x = Math.round(Math.random() * (canvas.width - canvas.cellWidth) / canvas.cellWidth);
+    this.y = Math.round(Math.random() * (canvas.height - canvas.cellWidth) / canvas.cellWidth);
+    this.checkCollision();
+  };
+
+  this.checkCollision = function() {
+    if (mainSnake.colliding(this.x, this.y)) {
+      this.generateCoords();
+    }
+  };
+
+  this.draw = function() {
+    canvas.pain(this.x, this.y, 'purple');
+  };
+
+  this.generateCoords();
+  this.checkCollision();
+  this.draw();
+}
+
+var game = new Object();
+game.fps = 30;
+game.score = 0;
+game.scoreText = 'Blocks eaten: ';
+game.drawScore = function() {
+  canvas.paintText(this.scoreText + this.score);
+};
+
+game.runLoop = function() {
+  setTimeout(function() {
+    requestAnimationFrame(game.runLoop);
+    mainSnake.move();
+    if (typeof food.draw != 'undefined') {
+      food.draw();
+    }
+
+    game.drawScore();
+  }, 1000 / game.fps);
+};
+
+game.start = function() {
+  mainSnake = new Snake(5, 'black', 'white', {x: 10, y: 10});
+  food = new Food();
+  game.score = 0;
+};
+
+game.start();
+
+document.onkeydown = function(e) {
+  if (typeof mainSnake !== 'undefined') {
+    // Cross browser keycode detection
+    var key = (e.keyCode ? e.keyCode : e.which);
+    var td;
+    if (mainSnake.nd.length) {
+      td = mainSnake.nd[mainSnake.nd.length - 1];
+    } else {
+      td = mainSnake.direction;
+    }
+
+    if (key == "37" && mainSnake.direction != 'right') {
+      mainSnake.nd.push('left');
+    } else if (key == "38" && mainSnake.direction != 'down') {
+      mainSnake.nd.push('up');
+    } else if (key == "39" && mainSnake.direction != 'left') {
+      mainSnake.nd.push('right');
+    } else if (key == "40" && mainSnake.direction != 'up') {
+      mainSnake.nd.push('down');
+    }
+  }
 };
