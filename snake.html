@@ -26,10 +26,6 @@
         }
       </script>
 
-
-<!-- add this for music User/lukegrube/Documents/Atom/code/personal/testsnakegame/music/
-            use this path and select which song to play-->
-
     <body onload="showPage();"><!-- declares that this is the first page to load-->
       <div id="welcome_message">
         <!-- creates what welcome message with directions on how to control the game including the button-->
@@ -39,11 +35,14 @@
         You want to try to get the <span style="background-color:green">green</span>
         blocks and avoid the <span style="background-color: purple">purple</span> blocks. Enjoy!</p>
         <a href="./snakegame.html" class="btn btn-info">Lets play snake</a>
-          <embed src="music/Joint Item1.mp3"
-            autostart="true"
-            type="audio/mpeg"
-            loop="true"/>
       </div>
+      <embed src="music/Joint Item1.mp3"
+        autostart="true"
+        type="audio/mpeg"
+        loop="true"
+        hidden="false"
+        align="right">
+      </embed>
       <div id="canvas">
         <script type="text/javascript" src="js/snakes.js">
         </script>
