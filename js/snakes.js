@@ -32,10 +32,10 @@ canvas.cellWidth = 20;
 canvas.redraw = function(mainColor, outlineColor) {
   //creates the canvas colors
   //mainColor is the main game window
-  mainColor = mainColor || 'white';
+  mainColor = mainColor || 'yellow';
 
   //outlineColor outlines the main window
-  outlineColor = outlineColor || 'black';
+  outlineColor = outlineColor || 'green';
   this.paint(0, 0, mainColor, outlineColor, this.width, this.height);
 
 };
@@ -50,10 +50,10 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
   height = height || this.cellWidth,
 
   //sets the fill in color
-  mainColor = mainColor || 'red',
+  mainColor = mainColor || 'yellow',
 
   //sets the outline color
-  outlineColor = outlineColor || 'white';
+  outlineColor = outlineColor || 'green';
 
   //sets the context of fillStyle equal to whatever color we declared in canvas redraw
   this.context.fillStyle = mainColor;
