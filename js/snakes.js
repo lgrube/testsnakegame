@@ -8,7 +8,7 @@
 var canvas = new Object(); //creates a new object called canvas
 var mainSnake; //create the variable mainSnake
 var Food; //creates the variable goodFood
-var badFood; //creates the variable badFood
+//var badFood; //creates the variable badFood
 /*----end create variable--*/
 
 /*----------------------canvas elements---------------*/
@@ -25,14 +25,14 @@ canvas.height = canvas.element.getAttribute('height');
 
 //setts the size of the snake by using cell blocks
 //have to make sure canvas size can support cell width or it will be to big and wont run correctly
-canvas.cellWidth = 20;
+canvas.cellWidth = 15;
 /*-----------------end canvas elements----------------*/
 
 /*-------------drawing the canvas--------------*/
 canvas.redraw = function(mainColor, outlineColor) {
   //creates the canvas colors
   //mainColor is the main game window
-  var mainColor = mainColor || 'white',
+  var mainColor = mainColor || 'black',
 
   //outlineColor outlines the main window
   outlineColor = outlineColor || 'black';
@@ -72,7 +72,7 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
 /*---------------colored text----------------*/
 canvas.paintText = function(text, x, y) {
   //controls where the text is according to the x axis
-  x = x || 5;
+  var x = x || 10,
 
   //controls where the text is according to the y axis
   y = y || 15;
@@ -207,7 +207,7 @@ function Food() {
   };
 
   this.draw = function() {
-    canvas.pain(this.x, this.y, 'purple');
+    canvas.paint(this.x, this.y, 'limegreen');
   };
 
   this.generateCoords();
@@ -216,7 +216,7 @@ function Food() {
 }
 
 var game = new Object();
-game.fps = 30;
+game.fps = 20;
 game.score = 0;
 game.scoreText = 'Blocks eaten: ';
 game.drawScore = function() {
@@ -236,13 +236,13 @@ game.runLoop = function() {
 };
 
 game.start = function() {
-  mainSnake = new Snake(5, 'green', 'yellow', {x: 10, y: 10});
+  mainSnake = new Snake(5, 'red', 'yellow', {x: 10, y: 10});
   food = new Food();
   game.score = 0;
 };
 
 game.over = function() {
-
+  window.location.href = "deadsnake.html";
 };
 
 game.start();
