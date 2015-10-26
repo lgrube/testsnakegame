@@ -5,7 +5,7 @@
 */
 
 /*----------------create variable------------------*/
-var canvas = new Object(); //creates a new object called canvas
+var canvas = new Object({}); //creates a new object called canvas
 var mainSnake; //create the variable mainSnake
 var Food; //creates the variable goodFood
 //var badFood; //creates the variable badFood
@@ -32,7 +32,7 @@ canvas.cellWidth = 15;
 canvas.redraw = function(mainColor, outlineColor) {
   //creates the canvas colors
   //mainColor is the main game window
-  var mainColor = mainColor || 'black',
+  mainColor = mainColor || 'black',
 
   //outlineColor outlines the main window
   outlineColor = outlineColor || 'black';
@@ -44,7 +44,7 @@ canvas.redraw = function(mainColor, outlineColor) {
 /*------------giving the canvas its color-------*/
 canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
   //setting the width of the canvas to whatever its been declared at
-  var width = width || this.cellWidth,
+  width = width || this.cellWidth,
 
   //setting the height of the canvas to what its been declared
   height = height || this.cellWidth,
@@ -72,7 +72,7 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
 /*---------------colored text----------------*/
 canvas.paintText = function(text, x, y) {
   //controls where the text is according to the x axis
-  var x = x || 10,
+  x = x || 10,
 
   //controls where the text is according to the y axis
   y = y || 15;
@@ -215,7 +215,7 @@ function Food() {
   this.draw();
 }
 
-var game = new Object();
+var game = new Object({});
 game.fps = 20;
 game.score = 0;
 game.scoreText = 'Blocks eaten: ';
