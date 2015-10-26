@@ -158,7 +158,6 @@ Snake.prototype.move = function() {
     badfood = new BadFood();
     head = this.array.pop();
   } else {
-  //  tail = this.array.pop();
     tail.x = this.nx;
     tail.y = this.ny;
   }
