@@ -8,7 +8,7 @@
 var canvas = new Object({}); //creates a new object called canvas
 var mainSnake; //create the variable mainSnake
 var Food; //creates the variable goodFood
-//var badFood; //creates the variable badFood
+var BadFood; //creates the variable badFood
 /*----end create variable--*/
 
 /*----------------------canvas elements---------------*/
@@ -152,6 +152,16 @@ Snake.prototype.move = function() {
     tail.y = this.ny;
   }
 
+  if (this.eatingBadFood()) {
+    game.score--;
+    tail = {x: this.nx, y: this.ny};
+    badfood = new BadFood();
+  //} else {
+  //  tail = this.array.pop();
+  //  tail.x = this.nx;
+  //  tail.y = this.ny;
+  }
+
   this.array.unshift(tail);
   this.paint();
 };
@@ -175,6 +185,14 @@ Snake.prototype.outsideBounds = function() {
 
 Snake.prototype.eatingFood = function() {
   if (this.nx === food.x && this.ny === food.y) {
+    return true;
+  }
+
+  return false;
+};
+
+Snake.prototype.eatingBadFood = function() {
+  if (this.nx === badfood.x && this.ny === badfood.y) {
     return true;
   }
 
@@ -215,6 +233,28 @@ function Food() {
   this.draw();
 }
 
+function BadFood() {
+  this.generateCoords = function() {
+    this.x = Math.round(Math.random() * (canvas.width - canvas.cellWidth) / canvas.cellWidth);
+    this.y = Math.round(Math.random() * (canvas.height - canvas.cellWidth) / canvas.cellWidth);
+    this.checkCollision();
+  };
+
+  this.checkCollision = function() {
+    if (mainSnake.colliding(this.x, this.y)) {
+      this.generateCoords();
+    }
+  };
+
+  this.draw = function() {
+    canvas.paint(this.x, this.y, 'purple');
+  };
+
+  this.generateCoords();
+  this.checkCollision();
+  this.draw();
+}
+
 var game = new Object({});
 game.fps = 20;
 game.score = 0;
@@ -231,6 +271,10 @@ game.runLoop = function() {
       food.draw();
     }
 
+    if (typeof badfood.draw != 'undefined') {
+      badfood.draw();
+    }
+
     game.drawScore();
   }, 1000 / game.fps);
 };
@@ -238,6 +282,7 @@ game.runLoop = function() {
 game.start = function() {
   mainSnake = new Snake(5, 'red', 'yellow', {x: 10, y: 10});
   food = new Food();
+  badfood = new BadFood();
   game.score = 0;
 };
 
