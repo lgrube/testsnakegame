@@ -156,10 +156,11 @@ Snake.prototype.move = function() {
     game.score--;
     tail = {x: this.nx, y: this.ny};
     badfood = new BadFood();
-  //} else {
+    head = this.array.pop();
+  } else {
   //  tail = this.array.pop();
-  //  tail.x = this.nx;
-  //  tail.y = this.ny;
+    tail.x = this.nx;
+    tail.y = this.ny;
   }
 
   this.array.unshift(tail);
