@@ -79,6 +79,7 @@ canvas.paintText = function(text, x, y) {
 
   //fills in the text with these coordinates
   this.context.fillText(text, x, y);
+  this.canvas.background-color('limegreen');
 };
 /*----------------end colored text-----------*/
 
@@ -157,6 +158,9 @@ Snake.prototype.move = function() {
     tail = {x: this.nx, y: this.ny};
     badfood = new BadFood();
     head = this.array.pop();
+    if (head === this.array[0]) {
+      game.over();
+    }
   } else {
     tail.x = this.nx;
     tail.y = this.ny;
