@@ -50,10 +50,10 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
   height = height || this.cellWidth,
 
   //sets the fill in color
-  mainColor = mainColor || 'red',
+  mainColor = mainColor || 'black',
 
   //sets the outline color
-  outlineColor = outlineColor || 'black';
+  outlineColor = outlineColor || 'red';
 
   //sets the context of fillStyle equal to whatever color we declared in canvas redraw
   this.context.fillStyle = mainColor;
@@ -72,14 +72,13 @@ canvas.paint = function(x, y, mainColor, outlineColor, width, height) {
 /*---------------colored text----------------*/
 canvas.paintText = function(text, x, y) {
   //controls where the text is according to the x axis
-  x = x || 10,
+  x = 10,
 
   //controls where the text is according to the y axis
-  y = y || 15;
+  y = 15;
 
   //fills in the text with these coordinates
   this.context.fillText(text, x, y);
-  this.canvas.background-color('limegreen');
 };
 /*----------------end colored text-----------*/
 
@@ -271,12 +270,12 @@ game.runLoop = function() {
   setTimeout(function() {
     requestAnimationFrame(game.runLoop);
     mainSnake.move();
-    if (typeof food.draw != 'undefined') {
-      food.draw();
-    }
-
     if (typeof badfood.draw != 'undefined') {
       badfood.draw();
+    }
+
+    if (typeof food.draw != 'undefined') {
+      food.draw();
     }
 
     game.drawScore();
