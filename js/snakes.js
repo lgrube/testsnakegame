@@ -148,6 +148,8 @@ Snake.prototype.move = function() {
     game.score++;
     tail = {x: this.nx, y: this.ny};
     food = new Food();
+    badfood = new BadFood();
+    badfood2 = new BadFood2();
   } else {
     tail = this.array.pop();
     tail.x = this.nx;
@@ -158,6 +160,8 @@ Snake.prototype.move = function() {
     game.score--;
     tail = {x: this.nx, y: this.ny};
     badfood = new BadFood();
+    badfood2 = new BadFood2();
+    food = new Food();
     head = this.array.pop();
     if (head === this.array[0]) {
       game.over();
@@ -171,6 +175,8 @@ Snake.prototype.move = function() {
     game.score = game.score - 3;
     tail = {x: this.nx, y: this.ny};
     badfood2 = new BadFood2();
+    badfood = new BadFood();
+    food = new Food();
     head = this.array.pop();
     head = this.array.pop();
     head = this.array.pop();
