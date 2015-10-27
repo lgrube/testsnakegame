@@ -8,7 +8,9 @@
 var canvas = new Object({}); //creates a new object called canvas
 var mainSnake; //create the variable mainSnake
 var Food; //creates the variable goodFood
+var GoodFood2;
 var BadFood; //creates the variable badFood
+var BadFood2;
 /*----end create variable--*/
 
 /*----------------------canvas elements---------------*/
@@ -165,6 +167,21 @@ Snake.prototype.move = function() {
     tail.y = this.ny;
   }
 
+  if (this.eatingBadFood2()) {
+    game.score = game.score - 3;
+    tail = {x: this.nx, y: this.ny};
+    badfood2 = new BadFood2();
+    head = this.array.pop();
+    head = this.array.pop();
+    head = this.array.pop();
+    if (head === this.array[2]) {
+      game.over();
+    }
+  } else {
+    tail.x = this.nx;
+    tail.y = this.ny;
+  }
+
   this.array.unshift(tail);
   this.paint();
 };
@@ -196,6 +213,14 @@ Snake.prototype.eatingFood = function() {
 
 Snake.prototype.eatingBadFood = function() {
   if (this.nx === badfood.x && this.ny === badfood.y) {
+    return true;
+  }
+
+  return false;
+};
+
+Snake.prototype.eatingBadFood2 = function() {
+  if (this.nx === badfood2.x && this.ny === badfood2.y) {
     return true;
   }
 
@@ -258,6 +283,28 @@ function BadFood() {
   this.draw();
 }
 
+function BadFood2() {
+  this.generateCoords = function() {
+    this.x = Math.round(Math.random() * (canvas.width - canvas.cellWidth) / canvas.cellWidth);
+    this.y = Math.round(Math.random() * (canvas.height - canvas.cellWidth) / canvas.cellWidth);
+    this.checkCollision();
+  };
+
+  this.checkCollision = function() {
+    if (mainSnake.colliding(this.x, this.y)) {
+      this.generateCoords();
+    }
+  };
+
+  this.draw = function() {
+    canvas.paint(this.x, this.y, 'orange');
+  };
+
+  this.generateCoords();
+  this.checkCollision();
+  this.draw();
+}
+
 var game = new Object({});
 game.fps = 20;
 game.score = 0;
@@ -274,6 +321,10 @@ game.runLoop = function() {
       badfood.draw();
     }
 
+    if (typeof badfood2.draw != 'undefined') {
+      badfood2.draw();
+    }
+
     if (typeof food.draw != 'undefined') {
       food.draw();
     }
@@ -286,6 +337,7 @@ game.start = function() {
   mainSnake = new Snake(5, 'red', 'yellow', {x: 10, y: 10});
   food = new Food();
   badfood = new BadFood();
+  badfood2 = new BadFood2();
   game.score = 0;
 };
 
